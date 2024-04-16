@@ -2,7 +2,7 @@
 export function About(){
     return (
         <div>
-            About Page BerfTicket
+            About Page 
         </div>
     )
 }
