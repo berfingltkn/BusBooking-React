@@ -1,0 +1,101 @@
+.anaDiv  {
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  padding: 1.5em;
+  box-shadow: 0 6px 6px 0 rgba(0,0,0,.16);
+  border-radius: 1.5em;
+  min-height: 100% !important;
+  background-color: #ffffff;
+}
+
+
+.ItemNereden {
+  flex: 1;
+  margin-right: 0px;
+ 
+ 
+}
+.ItemNereye {
+  flex: 1;
+  margin-right: 0px;
+  
+}
+.ItemDate {
+  flex: 1;
+ 
+}
+.ItemButton{
+  flex: 1;
+  margin-right: 0px;
+  margin-left: 50px;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0px;
+ 
+}
+
+.inputField {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 5px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+}
+
+.searchIcon {
+  font-size: 20px;
+}
+.css-1nrlq1o-MuiFormControl-root {
+  width: 220px;
+}
+.itemContainer{
+  display: flex;
+    flex-direction: row;
+}
+.css-ci5apu-MuiSvgIcon-root {
+  width: 2em;
+}
+
+
+.datePicker{
+  margin-left: 10px;
+  height: 25px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #5c5c5c;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+.calenderIcon{
+  margin-left:50px
+}
+
