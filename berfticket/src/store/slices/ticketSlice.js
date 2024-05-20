@@ -6,6 +6,7 @@ initialState:{
 from:'',
 to:'',
 date:'',
+trips:[]
 },
 reducers:{
 setFrom:(state,action)=>{
@@ -20,8 +21,11 @@ setDate:(state,action)=>{
     
     state.date=action.payload; //Redux store da bulunan date alanını, action.payload değeriyle günceller.
 },
+setTrips: (state, action) => {
+    state.trips = action.payload; // trips verilerini günceller
+  },
 }
 });
 
-export const {setFrom,setTo,setDate} = ticketSlice.actions;
+export const {setFrom,setTo,setDate,setTrips} = ticketSlice.actions;
 export const ticketReducer= ticketSlice.reducer;

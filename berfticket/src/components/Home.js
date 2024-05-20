@@ -12,17 +12,19 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFrom, setTo, setDate } from '../store/slices/ticketSlice';
+import { setFrom, setTo, setDate, setTrips } from '../store/slices/ticketSlice';
+import { format } from 'date-fns';
 
 export function Home() {
   const dispatch = useDispatch();
 
-  const { from, to, date } = useSelector((state) => {
+  const { from, to, date, trips } = useSelector((state) => {
 
     return {
       from: state.ticket.from,
       to: state.ticket.to,
-      date: state.ticket.date
+      date: state.ticket.date,
+      trips: state.ticket.trips
     };
   });
   console.log(from, to, date);
@@ -34,11 +36,12 @@ export function Home() {
   }
 
   const [dataCity, setDataCity] = useState([]);
-  const [selectedDate,setSelectedDate]=useState(startDate);
+  const [selectedDate, setSelectedDate] = useState(startDate);
 
   useEffect(() => {
     fetchData();
   }, []);
+
 
   const fetchData = async () => {
     try {
@@ -51,10 +54,25 @@ export function Home() {
 
   };
 
+  const formattedDate = format(selectedDate, "yyyy-MM-dd'T'00:00:00");
 
   const navigate = useNavigate()
-  const goToPage = () => {
+  const goToPage = async () => {
     navigate("./ticketPage/");
+
+    try {
+      //from,to ve date e göre trips leri getirsin, sonra da bunu slice daki trips e atsın
+      const response = await axios.get(`https://localhost:7224/api/trips/GetTripsByCityIDAndDate?departureCityID=${from}&arrivalCityID=${to}&departureDate=${formattedDate}`);
+
+      dispatch(setTrips(response.data.data));
+      console.log("trips değerleri----------------------", response.data.data);
+      console.log("slice trips değeri*************", trips);
+
+    }
+    catch (error) {
+      console.error('Bir hata oluştu:', error);
+
+    }
   }
 
 
@@ -72,7 +90,7 @@ export function Home() {
       </div>
       <div className='ticketContainer'>
         {/* Burada Ticket aracınızı ekleyebilirsiniz */}
-        <div>
+        <div style={{paddingTop:"50px",paddingBottom:"250px"}}>
 
           <div className='anaDiv'>
             <div className="itemContainer">
@@ -80,15 +98,15 @@ export function Home() {
                 <div className="inputContainer">
                   <FormControl className="choiceBox">
                     <InputLabel id="nereden-label"
-                    
+
                     >From</InputLabel>
 
-                    <Select 
-                    labelId="nereden-label" id="nereden-select" 
-                    onChange={(event)=>{
-                      dispatch(setFrom(event.target.value));
-                    }}
-                    value={from}
+                    <Select
+                      labelId="nereden-label" id="nereden-select"
+                      onChange={(event) => {
+                        dispatch(setFrom(event.target.value));
+                      }}
+                      value={from}
                     >
                       {dataCity.length > 0 ? (
                         dataCity.map((datacity) => (
@@ -109,15 +127,15 @@ export function Home() {
                 <div className="inputContainer">
                   <FormControl className="choiceBox">
                     <InputLabel id="nereye-label"
-                    
+
                     >To</InputLabel>
-                    <Select 
-                    
-                    labelId="nereye-label" id="nereye-select"  
-                    onChange={(event)=>{
-                      dispatch(setTo(event.target.value));
-                    }}
-                    value={to}
+                    <Select
+
+                      labelId="nereye-label" id="nereye-select"
+                      onChange={(event) => {
+                        dispatch(setTo(event.target.value));
+                      }}
+                      value={to}
                     >
                       {dataCity.length > 0 ? (
                         dataCity.map((datacity) => (
@@ -141,13 +159,15 @@ export function Home() {
 
                   className='datePicker'
                   selected={selectedDate}
-                  
+                  dateFormat="dd/MM/yyyy"
                   onChange={handleDateChange}
-                  value={date}
+                  value={formattedDate}
                 />
 
               </div>
             </div>
+
+            {/* bu buttona basıldığında slice daki trip değerine value eklesin */}
             <div className="ItemButton">
               <button className="searchButton" onClick={goToPage}>
                 <SearchIcon className="searchIcon" />
