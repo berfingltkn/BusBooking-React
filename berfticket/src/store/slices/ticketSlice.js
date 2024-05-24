@@ -6,7 +6,8 @@ initialState:{
 from:'',
 to:'',
 date:'',
-trips:[]
+trips:[],
+tripsId:[],
 },
 reducers:{
 setFrom:(state,action)=>{
@@ -24,8 +25,11 @@ setDate:(state,action)=>{
 setTrips: (state, action) => {
     state.trips = action.payload; // trips verilerini günceller
   },
+  setTripsId: (state, action) => {
+    state.tripsId = action.payload; // trips verilerini günceller
+  },
 }
 });
 
-export const {setFrom,setTo,setDate,setTrips} = ticketSlice.actions;
+export const {setFrom,setTo,setDate,setTrips,setTripsId} = ticketSlice.actions;
 export const ticketReducer= ticketSlice.reducer;

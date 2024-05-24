@@ -14,18 +14,20 @@ import Home from './Home';
 import { useContext } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFrom, setTo, setDate, setTrips } from '../store/slices/ticketSlice';
+import { setFrom, setTo, setDate, setTrips, setTripsId } from '../store/slices/ticketSlice';
 import { format } from 'date-fns';
 
-//deneme
+
 export function TicketPage() {
-  const { from, to, date, trips } = useSelector((state) => {
+  const { from, to, date, trips, tripsId } = useSelector((state) => {
 
     return {
       from: state.ticket.from,
       to: state.ticket.to,
       date: state.ticket.date,
-      trips: state.ticket.trips
+      trips: state.ticket.trips,
+      tripsId: state.ticket.tripsId,
+
     };
   });
 
@@ -35,7 +37,7 @@ export function TicketPage() {
 
   const dispatch = useDispatch();
 
- 
+
   console.log("ticketPage");
   console.log(from, to, date);
 
@@ -45,7 +47,11 @@ export function TicketPage() {
 
 
 
- 
+  const [id, setId] = useState(null);
+
+  const handleDetailClick = (trip) => {
+    setId(trip.tripID);
+  };
 
   const handleDateChange = (date) => {
     setStartDate(date);
@@ -79,6 +85,9 @@ export function TicketPage() {
 
       dispatch(setTrips(response.data.data));
 
+
+
+  
 
     }
     catch (error) {
@@ -167,10 +176,20 @@ export function TicketPage() {
 
 
       </div>
-      <div>
+      {/* <div>
         {trips.map((trip, index) => (
           <React.Fragment key={index}>
             <FilterCart trip={trip} />
+            {index !== trips.length - 1 && <div style={{ marginBottom: '10px' }}></div>}
+          </React.Fragment>
+        ))}
+        <div style={{ marginBottom: '500px' }}></div>
+      </div> */}
+      <div>
+        {trips.map((trip, index) => (
+          <React.Fragment key={index}>
+            <FilterCart trip={trip}
+            />
             {index !== trips.length - 1 && <div style={{ marginBottom: '10px' }}></div>}
           </React.Fragment>
         ))}

@@ -81,16 +81,16 @@ export function Home() {
 
     <div className='container'>
       <div className='titleContainer'>
-        <h1 className='title'>
+        <h1 className='title' style={{textShadow:"0 0 10px red"}}>
           The address of safe and cheap tickets
         </h1>
-        <h1 className='subtitle'>
+        <h1 className='subtitle' style={{textShadow:"0 0 10px red"}}>
           Have a nice trip...
         </h1>
       </div>
       <div className='ticketContainer'>
         {/* Burada Ticket aracınızı ekleyebilirsiniz */}
-        <div style={{paddingTop:"50px",paddingBottom:"250px"}}>
+        <div style={{paddingTop:"50px",paddingBottom:"250px",width:"985px"}}>
 
           <div className='anaDiv'>
             <div className="itemContainer">

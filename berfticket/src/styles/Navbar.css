@@ -10,6 +10,15 @@
     justify-content: center;
     border-bottom: white 300px;
   }
+  .linkText{
+    padding-left: 15px;
+    font-size: larger;
+  }
+  .linkWithIcon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   
   .navbar .main {
     width: 100%;
@@ -19,7 +28,11 @@
     padding-left: 150px;
     padding-right: 150px;
   }
-  
+  .displayDüzen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .navbar .leftSide {
     display: flex;
     align-items: center;
@@ -31,22 +44,47 @@
   }
   
   .navbar .leftSide .brand {
-    font-size: 20px;
+    font-size: 25px;
     color: white;
+    text-shadow: 0 0 10px #f8d06e;
+
   }
   
   .navbar .mainLink {
+    width: 650px;
     display: flex;
     align-items: center;
+   
+    justify-content: space-between;
   }
-  
+  /* .mainLink:hover{
+    text-shadow: 0 0 10px #f8d06e;
+  } */
+ .linkText:hover{
+  text-shadow: 0 0 10px #f8d06e;
+ }
+ .dropdown-menu.show {
+  margin-left: -38px;
+  margin-right: 1px;
+  display: block;
+  background-color: #dd8626;
+  margin-top: 5px;
+
+}
+
   .navbar .mainLink a {
     color: white;
     text-decoration: none;
     margin-right: 20px;
     font-size: 16px;
   }
-  
+  .settingIcon:hover{
+    border-radius: 15px;
+    box-shadow: 0 0 10px #f8d06e;
+  }
+  .dropdownSetting:hover{
+    box-shadow: 0 0 10px #f8d06e;
+  }
   .navbar .rightSide .logoButton {
     background-color: transparent;
     border: none;
