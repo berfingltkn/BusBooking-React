@@ -63,11 +63,11 @@ export function Navbar() {
 
                 <div className="rightSide">
                     <Dropdown>
-                        <Dropdown.Toggle variant="success"  style={{backgroundColor:"rgb(232 159 79)", border:"2px solid #dd8626",width:"80px"}} className='dropdownSetting'>
-                            <ManageHistoryIcon style={{backgroundColor:"rgb(232 159 79)"}}/>
+                        <Dropdown.Toggle variant="success"  style={{backgroundColor:"#e49537", border:"2px solid #dd8626",width:"80px"}} className='dropdownSetting'>
+                            <ManageHistoryIcon style={{backgroundColor:"#e49537"}}/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#" style={{color:"white",textShadow:"0 0 10px black"}} >
+                            <Dropdown.Item href="#" style={{color:"white"}} >
                             <Link to="/historyTickets" style={{textDecoration:"none",color:"white"}}>
                             Inquire about travel
                             </Link>

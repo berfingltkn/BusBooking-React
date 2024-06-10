@@ -125,7 +125,7 @@ export function TicketPage() {
 
                     </Select>
                   </FormControl>
-                  <TransferWithinAStationIcon className="icon" color="primary" sx={{ margin: 2 }} />
+                  <TransferWithinAStationIcon className="icon" color=" #e49537" sx={{ margin: 2 }} />
                 </div>
               </div>
               <div className="ItemNereye">
@@ -153,7 +153,7 @@ export function TicketPage() {
             </div>
             <div className="ItemDate">
               <div className="inputContainer">
-                <CalendarMonthIcon color="primary" className='calenderIcon' />
+                <CalendarMonthIcon color=" #e49537" className='calenderIcon' />
                 <DatePicker
                   onChange={handleDateChange}
                   className='datePicker'

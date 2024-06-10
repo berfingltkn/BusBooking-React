@@ -1,0 +1,203 @@
+.stepper {
+    margin: auto;
+    width: 80%;
+}
+
+.insuranceprogress__main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    width: 1013px;
+    height: 90px;
+    margin-bottom: 25px;
+   
+}
+
+.insuranceprogress__container {
+    display: flex;
+    margin-inline: auto;
+}
+
+.insuranceprogress__main .insuranceprogress__container .insuranceprogress__circle_info_node {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -22px;
+}
+
+ .insuranceprogress__line {
+    background-color: white;
+    border: 0;
+    height: 3px;
+    margin: 10px -63px 0;
+    width: 700px;
+    height: 5px;
+    box-shadow: 0 0 10px #f8d06e;
+    
+}
+.insuranceprogress__line.active{
+  background-color: #e49537;
+  box-shadow: 0 0 10px #f8d06e;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    font-size: 20px;
+    color: white;
+}
+.insuranceprogress__circle {
+    border: 3px solid hsla(0, 0%, 50%, .384);
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    box-shadow: 0 0 25px gray;
+}
+.insuranceprogress__circle.active {
+    border-width: 5px;
+    border-color: #e49537;
+    box-shadow: 0 0 25px #f8d06e;
+}
+
+.insuranceprogress__info {
+    color: #001248;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+}
+
+.complementary_general-info__main{
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1em auto auto;
+    width: 80%;
+}
+/**/
+.field-wrapper {
+    margin-bottom: 16px;
+    height: 41.59px;
+    padding-right: 20px;
+  }
+  .field-wrapper2 {
+    margin-bottom: 16px;
+    height: 41.59px;
+    width: 212px;
+    
+  }
+  .field-wrapper3 {
+    margin-bottom: 16px;
+    height: 41.59px;
+    width: 212px;
+    
+  }
+  
+  
+  .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -16px;
+    margin-left: -16px;
+  }
+  
+  .grid-item {
+    padding-left: 16px;
+  }
+  
+  .input {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    border: 0;
+    box-sizing: border-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+  
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    padding: 12px 8px;
+  }
+  
+  input[type="text"] {
+    width: 235;
+    height: 30;
+    padding: 5px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 15px;
+    padding-left: 18px;
+  }
+  
+  form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: rgb(189 179 179 / 50%);
+
+  }
+  
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    height: 100%;
+  }
+  .insurancebutton__container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1em;
+    margin-bottom: 80px;
+  }
+
+ 
+  
+  .form-content-area {
+    border: 2px solid #e2edfd;
+    border-radius: 1em;
+ 
+    padding: 32px;
+
+    margin-top: 0px;
+  }
+ 
+  .error-message {
+    color: rgb(211, 47, 47);
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+    margin: 3px 14px 0;
+    font-size: 12px;
+  }
+.LoaderDiv{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 1600px;
+  height: 780px;
+  position: absolute;
+  transform: translate(10px, 10px);
+  z-index: 9999;
+  top: -3%;
+  left: -1%;
+  background-color: rgba(200, 200, 200, 0.3);
+}
+.custom-toast-success {
+  background-color: green;
+}
+
+.custom-toast-success .toastify-content {
+  color: white;
+}
+
+.PrivateSwitchBasee-input.css-1m9pwf3:checked {
+  background-color: #e49537;
+  border-color: #e49537;
+}

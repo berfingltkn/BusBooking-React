@@ -11,12 +11,16 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import AirlineSeatReclineExtraIcon from '@mui/icons-material/AirlineSeatReclineExtra';
+import { useNavigate } from 'react-router-dom';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Grid from '@mui/material/Grid';
+import { Height, RunCircle } from '@mui/icons-material';
 
 export function FilterCart({ trip }) {
     const [nameOfFrom, setNameFrom] = useState("");
     const [nameOfTo, setNameTo] = useState("");
     const [selectedSeat, setSelectedSeat] = useState();
-    const [seats,setSeats]=useState([]);
+    const [seats, setSeats] = useState([]);
 
     const { from, to } = useSelector((state) => {
 
@@ -49,35 +53,39 @@ export function FilterCart({ trip }) {
         }
 
     };
+    const navigate = useNavigate();
+    const getBuyPage = () => {
+        navigate("/payment");
 
-  
-        const fetchTicketData = async () => {
+    }
 
-          try {
+    const fetchTicketData = async () => {
+
+        try {
             console.log(tripID);
             const response = await axios.get(`https://localhost:7224/api/tickets/getticketbytripid?tripId=${tripID}`);
             console.log(response.data.data);
 
             if (response.data.success) {
                 const seatIDs = response.data.data.map(ticket => ticket.seatID);
-              setSeats(seatIDs);
-              console.log("-***--**-*-**--->",seatIDs);
+                setSeats(seatIDs);
+                console.log("-***--**-*-**--->", seatIDs);
             } else {
-              setSeats([]);
+                setSeats([]);
             }
-          } catch (error) {
+        } catch (error) {
             console.error('Veri alınırken hata oluştu', error);
             setSeats([]);
-          }
-        };
+        }
+    };
 
 
     const [isDetailVisible, setIsDetailVisible] = useState(false);
-    const handleButtonClick = async() => {
+    const handleButtonClick = async () => {
         setIsDetailVisible(!isDetailVisible);
         fetchTicketData();
-        
-        
+
+
     };
 
     const numberOfRows = 6;
@@ -90,17 +98,17 @@ export function FilterCart({ trip }) {
         for (let row = 1; row <= numberOfRows; row++) {
             const rowButtons = [];
             for (let column = 1; column <= numberOfColumns; column++) {
-             
-                let numberSelect=seatNumber;
+
+                let numberSelect = seatNumber;
                 rowButtons.push(
-                    <button key={`${row}-${column}`} 
-                    className={`seat-button ${seats.includes(seatNumber) ? 'selected' : ''}`}
-                    onClick={(event)=>{
-                        setSelectedSeat(numberSelect);
-                    }}
-                    
+                    <button key={`${row}-${column}`}
+                        className={`seat-button ${seats.includes(seatNumber) ? 'selected' : ''}`}
+                        onClick={(event) => {
+                            setSelectedSeat(numberSelect);
+                        }}
+
                     >
-                        
+
                         {seatNumber}
                     </button>
                 );
@@ -111,17 +119,17 @@ export function FilterCart({ trip }) {
                     {rowButtons}
                 </div>
             );
-            
+
         }
-       
+
         return <div className="seat-container">{seatButtons}</div>;
     };
     useEffect(() => {
         fetchData();
-      }, [from,to]);
-      useEffect(() => {
-       console.log(selectedSeat,"aaaaaaaaaaaaaaaaaa");
-      }, [selectedSeat]);
+    }, [from, to]);
+    useEffect(() => {
+        console.log(selectedSeat, "aaaaaaaaaaaaaaaaaa");
+    }, [selectedSeat]);
     return (
         <div className='ana'>
             <div className='Main'>
@@ -134,26 +142,26 @@ export function FilterCart({ trip }) {
                             </div>
                             <div className='time'>
                                 <div className='timeMain'>
-                                    <DepartureBoardIcon style={{color:"#8888e7"}}/>
-                                    <div className='textTime'style={{color:"#8888e7"}}>{departureTime}</div>
+                                    <DepartureBoardIcon style={{ color: "#8888e7" }} />
+                                    <div className='textTime' style={{ color: "#8888e7" }}>{departureTime}</div>
                                 </div>
                             </div>
                             <div className='from'>
                                 <div className='fromMain'>
-                                    <PushPinIcon style={{color:"#8888e7"}}/>
-                                    <div className='textFrom'style={{color:"#8888e7"}}>{nameOfFrom}</div>
+                                    <PushPinIcon style={{ color: "#8888e7" }} />
+                                    <div className='textFrom' style={{ color: "#8888e7" }}>{nameOfFrom}</div>
                                 </div>
                             </div>
                             <div className='to'>
                                 <div className='toMain'>
-                                    <LocationOnIcon style={{color:"#8888e7"}}/>
-                                    <div className='textTo' style={{color:"#8888e7"}}>{nameOfTo}</div>
+                                    <LocationOnIcon style={{ color: "#8888e7" }} />
+                                    <div className='textTo' style={{ color: "#8888e7" }}>{nameOfTo}</div>
                                 </div>
                             </div>
                             <div className='price'>
                                 <div className='priceMain'>
-                                    <AttachMoneyIcon style={{color:"#8888e7"}}/>
-                                    <div className='textPrice' style={{color:"#8888e7"}}>{price}</div>
+                                    <AttachMoneyIcon style={{ color: "#8888e7" }} />
+                                    <div className='textPrice' style={{ color: "#8888e7" }}>{price}</div>
                                 </div>
                             </div>
                             <div className='buttonDiv'>
@@ -175,17 +183,17 @@ export function FilterCart({ trip }) {
 
                                     <div className='Continue'>
                                         <div className='seatSelectedNumber'>
-                                            <h3 style={{color:"#8888e7",fontSize:"20px"}}>Selected Seat: </h3>
-                                            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                                                <AirlineSeatReclineExtraIcon style={{width:"50px",height:"38px",color:"#8888e7"}}/>
-                                            <div className='selectedSeatTEXT'>{selectedSeat}</div>
-                                     
+                                            <h3 style={{ color: "#8888e7", fontSize: "20px" }}>Selected Seat: </h3>
+                                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                                <AirlineSeatReclineExtraIcon style={{ width: "50px", height: "38px", color: "#8888e7" }} />
+                                                <div className='selectedSeatTEXT'>{selectedSeat}</div>
+
                                             </div>
-                                              </div>
+                                        </div>
 
                                     </div>
                                     <div className='Buy'>
-                                        <button className='buttonBuy'>
+                                        <button className='buttonBuy' onClick={ getBuyPage }>
                                             Buy Ticket
                                         </button>
                                     </div>

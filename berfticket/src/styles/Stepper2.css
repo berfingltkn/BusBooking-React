@@ -1,0 +1,158 @@
+*, :after, :before {
+    box-sizing: inherit;
+}
+.paymentcreditcard__container{
+width: 1257px;
+height: 491px;
+
+}
+.paymentcreditcard__content{
+    display: flex;
+    justify-content: space-between;
+}
+.paymentcreditcard__info{
+    width: 55%;
+    height: 313px;
+    border: 2px solid #e2edfd;
+    border-radius: 14px;
+    margin-top: 1.1em;
+    padding: 0 0 2em;
+    
+}
+.paymentcreditcard__left-container{
+    width: 40%;
+}
+.paymentcreditcard__fieldset{
+    width: 685px;
+    height: 313.73px;
+    border: 2px solid #e2edfd;
+    border-radius: 14px;
+    margin-top: 1.1em;
+    padding: 0 0 2em;
+}
+.paymentcreditcard__input{
+    display: grid;
+    padding: 2em 2em 0;
+    grid-gap: 2rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+}
+.css-18tn63aa{
+    grid-gap: 2rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 2em 2em 0;
+}
+.css-1tz8m29{
+    padding: 2em 2em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.field-wrapper22{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 302px;
+    height: 41px;
+    margin-left: -31px;
+}
+.field-wrapper33{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 31px;
+}
+
+
+.field-wrapper44{
+    width: 302px;
+    height: 41px;
+}
+.field-wrapper55{
+    width: 602px;
+    height: 45px;
+    display: inline-flex;
+    border: 1px solid #9f9f9f9c;
+    border-radius: 4px;
+}
+.paymentcreditcard__card_container{
+    height: 250px;
+    margin-top: 1.1em;
+}
+.paymentcreditcard__card_flip {
+    border: 2px solid #e2edfd;
+    border-radius: 20px;
+    height: 100%;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: -webkit-transform .6s;
+    transition: transform .6s;
+    transition: transform .6s, -webkit-transform .6s;
+    background: rgb(189 179 179 / 50%);
+}
+.paymentcreditcard__info_container {
+    border: 2px solid #e2edfd;
+    border-radius: 20px;
+    font-size: 1.8rem;
+    margin-top: 1em;
+    padding: 10px 30px;
+    height: 209px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(189 179 179 / 50%);
+}
+.paymentcreditcard__card_front {
+    grid-gap: 10px;
+    color: #adadad;
+    display: grid;
+    gap: 10px;
+    grid-template-rows: repeat(12, 1fr);
+    height: 250px;
+    padding: 30px 50px 0;
+    width: 497px;
+    margin-left: -50px;
+}
+.paymentcreditcard__chip {
+    align-items: flex-end;
+    display: flex;
+    grid-row: 1 / 5;
+    justify-content: space-between;
+    margin-left: 50px;
+}
+.paymentcreditcard__number {
+    align-items: flex-end;
+    display: flex;
+    grid-row: 5 / 7;
+    word-spacing: 20px;
+    margin-left: 50px;
+    width: 397px;
+    height: 27px;
+}
+.paymentcreditcard__expire {
+    font-size: 12px;
+    grid-row: 7 / 9;
+    margin-left: 50px;
+    width: 397px;
+    height: 27px;
+}
+.paymentcreditcard__name {
+    align-items: flex-start;
+    display: flex;
+    font-weight: 600;
+    grid-row: 9 / 13;
+    justify-content: space-between;
+    margin-left: 50px;
+    width: 397px;
+    height: 65px;
+}
+
+.form-check-input:checked {
+    background-color: #e49537;
+    border-color: #e49537;
+}

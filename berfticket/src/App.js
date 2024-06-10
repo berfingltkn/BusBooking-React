@@ -9,6 +9,7 @@ import { Footer } from './components/Footer';
 import { HistoryTickets } from './components/HistoryTickets';
 import BackImage from './assets/background-berfTicket.jpg';
 import {FilterCart} from './components/FilterCart';
+import {Payment} from './components/Payment';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route path="/about" exact element={<About />} />
         <Route path="/contact" exact element={<Contact />} />
         <Route path="/historyTickets" exact element={<HistoryTickets />} />
-        
+        <Route path="/payment" exact element={<Payment />} />
       </Routes>
       
     </div>

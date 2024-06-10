@@ -120,7 +120,7 @@ export function Home() {
 
                     </Select>
                   </FormControl>
-                  <TransferWithinAStationIcon className="icon" color="primary" sx={{ margin: 2 }} />
+                  <TransferWithinAStationIcon className="icon"  sx={{ margin: 2 }} />
                 </div>
               </div>
               <div className="ItemNereye">
@@ -154,7 +154,7 @@ export function Home() {
             </div>
             <div className="ItemDate">
               <div className="inputContainer">
-                <CalendarMonthIcon color="primary" className='calenderIcon' />
+                <CalendarMonthIcon  className='calenderIcon' />
                 <DatePicker
 
                   className='datePicker'
@@ -169,7 +169,7 @@ export function Home() {
 
             {/* bu buttona basıldığında slice daki trip değerine value eklesin */}
             <div className="ItemButton">
-              <button className="searchButton" onClick={goToPage}>
+              <button className="searchButtonn" onClick={goToPage}>
                 <SearchIcon className="searchIcon" />
               </button>
             </div>
