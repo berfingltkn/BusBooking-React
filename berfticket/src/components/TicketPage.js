@@ -38,7 +38,7 @@ export function TicketPage() {
   const dispatch = useDispatch();
 
 
-  console.log("ticketPage");
+  
   console.log(from, to, date);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const personalInformationSlice = createSlice({
-    name: 'personalInformationSlice',
+    name: 'personalInformation',
     initialState: {
         //başlangıç durumu
         tc_no: '',
@@ -9,8 +9,8 @@ const personalInformationSlice = createSlice({
         surname_person: '',
         phoneNo: '',
         mail_person: '',
-        declaration_person: '',//beyan
-        marketingAuthorization: ''
+        declaration_person: false,//beyan
+        marketingAuthorization: false
     },
     reducers: {
         //uygulama durumunun(state) güncellenmesinden sorumlu

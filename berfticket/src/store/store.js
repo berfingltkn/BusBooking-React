@@ -7,6 +7,6 @@ export const store=configureStore({
 reducer: {
 ticket:ticketReducer,
 payment:paymentReducer,
-personelInformation:personalInformationReducer
+personalInformation:personalInformationReducer
 },
 });

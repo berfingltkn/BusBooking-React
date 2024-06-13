@@ -10,27 +10,49 @@ import '../styles/Payment.css';
 import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import { Stepper2 } from './Stepper2.js';
-
+import { setTcNo, setName, setSurname, setPhoneNo, setMail, setDeclaration, setMarketingAuthorization } from '../store/slices/personalInformationSlice.js'
+import Alert from '@mui/material/Alert';
+import axios from 'axios';
 
 export function Payment() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [checkbox1Checked, setCheckbox1Checked] = useState(false);
   const [checkbox2Checked, setCheckbox2Checked] = useState(false);
+  const [alertStatus, setAlertStatus] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);//loader spinner için
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch();
 
+  const { tc_no, name_person, surname_person, phoneNo, mail_person, declaration_person, marketingAuthorization } = useSelector((state) => {
+
+    return {
+      tc_no: state.personalInformation.tc_no,
+      name_person: state.personalInformation.name_person,
+      surname_person: state.personalInformation.surname_person,
+      phoneNo: state.personalInformation.phoneNo,
+      mail_person: state.personalInformation.mail_person,
+      declaration_person: state.personalInformation.declaration_person,
+      marketingAuthorization: state.personalInformation.marketingAuthorization,
+    };
+  });
   const handleCheckbox1Change = (event) => {
     setCheckbox1Checked(event.target.checked);
+    dispatch(setDeclaration(event.target.checked));
+    console.log(declaration_person);
 
     // dispatch(setDeclaration(true));
   };
   const handleCheckbox2Change = (event) => {
+
     setCheckbox2Checked(event.target.checked);
+    dispatch(setMarketingAuthorization(event.target.checked));
+    console.log(marketingAuthorization);
 
     // dispatch(setMarketingAuthorization(true));
   };
+
+
   return (
     <div className="stepper">
       <div class="complementary_general-info__main">
@@ -81,17 +103,65 @@ export function Payment() {
                   setFieldValue('step', values.step - 1)
 
                 }
-                const nextHandle = e => {
+                const nextHandle = e  => {
+
+                  if (name_person != "" && surname_person != "" && tc_no != "" && phoneNo != "") {
+                   
+                    addTcNo();
+                    setIsLoading(true);
+                    setTimeout(() => {
+                      setIsLoading(false);
+                      setFieldValue('step', values.step + 1);
+                    }, 3000);
+  
+                    console.log("tc no*:", tc_no, "*isim*:", name_person);
 
 
-                  setIsLoading(true);
-                  setTimeout(() => {
-                    setIsLoading(false);
-                    setFieldValue('step', values.step + 1);
-                  }, 3000);
+                   
+                  }
+                  else {
+                    setAlertStatus(true);
+                    setTimeout(() => {
+                      setAlertStatus(false);
+                    }, 5000);
+                  }
+
+
+                  
+
                 }
 
-
+                const addTcNo = async () => {
+                  try {
+                    const responseTc = await axios.get(`https://localhost:7224/api/customers/getcustomerbyid?id=${tc_no}`);
+              
+                    if (!responseTc.data.data) {
+                      console.log("boş geliyorr")
+                  
+                      
+                      const storeData = {
+                        customerID: tc_no,
+                        name: name_person,
+                        surname: surname_person,
+                        mail: mail_person,
+                        phoneNo: phoneNo,
+                        marketingAuthorization: marketingAuthorization,
+                        declaration: declaration_person,
+                       
+                      };
+              
+                      const response = await axios.post('https://localhost:7224/api/customers/add', storeData);
+                      console.log('Yeni kayıt oluşturuldu', response.data);
+                    } else {
+                      console.log('Kayıt zaten mevcut', responseTc.data);
+                    }
+              
+                  } catch (error) {
+                    console.error('Bir hata oluştu:', error);
+              
+                  }
+                };
+              
 
 
                 return (
@@ -111,7 +181,7 @@ export function Payment() {
 
 
                         <div className='insuranceprogress__circle_info_node'>
-                          <div className={`insuranceprogress__circle${values.step === 2 ? ' active' : ''}`}></div>
+                          <div className={`insuranceprogress__circle${values.step === 1 || values.step === 2 ? ' active' : ''}`}></div>
                           <div className='insuranceprogress__info'>
                             <p>Payment</p>
                           </div>
@@ -140,27 +210,20 @@ export function Payment() {
                                 <Field as={TextField} name="tcNo" classname="input" placeholder="ID Number"
                                   inputMode="numeric"
                                   id="tcNo"
-                                  // value={tcNo}
-                                  // onChange={(e) => {
-                                  //   const value = e.target.value;
-                                  //   dispatch(setTcNo(value));
-                                  // }}
-                                  // onBlur={(e) => {
-                                  //   const value = e.target.value;
+                                  value={tc_no}
+                                  onChange={(e) => {
+                                    const value = e.target.value;
+                                    dispatch(setTcNo(value));
+                                    console.log("tc no in slice:", tc_no);
+                                  }}
+                                  onBlur={(e) => {
+                                    const value = e.target.value;
 
-                                  //   dispatch(setTcNo(value));
-                                  //   fetchData(value);
-                                  //   if (tcNo == "") {
+                                    dispatch(setTcNo(value));
+                                    //fetchData(value);
 
-                                  //     dispatch(setName(""));
-                                  //     dispatch(setSurname(""));
-                                  //     dispatch(setPhoneNo(""));
-                                  //     dispatch(setMail(""));
-                                  //     dispatch(setWeight(""));
-                                  //     dispatch(setHeight(""));
-                                  //   }
 
-                                  // }}
+                                  }}
                                   onKeyDown={(e) => {
                                     if (e.key !== 'Backspace' && e.key !== 'Delete' && e.target.value.length >= 11) {
                                       e.preventDefault();
@@ -207,13 +270,13 @@ export function Payment() {
                             <Grid item xs={6} sm={6} md={3} style={{ paddingTop: '15px' }} className='css-18tn63a'>
                               <div className='field-wrapper2'>
                                 <Field as={TextField} name="name" classname="input" placeholder="Name"
-                                  // value={name}
+                                  value={name_person}
                                   label='Name'
-                                  // onChange={(e) => {
+                                  onChange={(e) => {
 
-                                  //   dispatch(setName(e.target.value));
+                                    dispatch(setName(e.target.value));
 
-                                  // }}
+                                  }}
                                   InputLabelProps={{
                                     shrink: true,
                                     style: {
@@ -253,11 +316,11 @@ export function Payment() {
                               <div className='field-wrapper3'>
                                 <Field as={TextField} name="surname" classname="input" placeholder="Surname"
                                   label='Surname'
-                                  // value={surname}
-                                  // onChange={(e) => {
-                                  //   dispatch(setSurname(e.target.value));
+                                  value={surname_person}
+                                  onChange={(e) => {
+                                    dispatch(setSurname(e.target.value));
 
-                                  // }}
+                                  }}
                                   InputLabelProps={{
                                     shrink: true,
                                     style: {
@@ -300,11 +363,11 @@ export function Payment() {
                               <div className='field-wrapper' >
 
                                 <Field as={TextField} name="mail" classname="input" placeholder="Mail"
-                                  // value={mail}
-                                  // onChange={(e) => {
-                                  //   dispatch(setMail(e.target.value));
+                                  value={mail_person}
+                                  onChange={(e) => {
+                                    dispatch(setMail(e.target.value));
 
-                                  // }}
+                                  }}
                                   label='Mail'
                                   InputProps={{
                                     style: { background: 'white', height: '41.59px' },
@@ -344,11 +407,11 @@ export function Payment() {
                               <div className='field-wrapper' >
 
                                 <Field as={TextField} name="phone_no" classname="input" placeholder="Phone Number"
-                                  // value={phone_no}
-                                  // onChange={(e) => {
-                                  //   dispatch(setPhoneNo(e.target.value));
-
-                                  // }}
+                                  value={phoneNo}
+                                  onChange={(e) => {
+                                    dispatch(setPhoneNo(e.target.value));
+                                    console.log("phoneno in slice:", phoneNo)
+                                  }}
                                   inputMode="numeric"
                                   onKeyDown={(e) => {
                                     if (e.key !== 'Backspace' && e.key !== 'Delete' && e.target.value.length >= 10) {
@@ -401,21 +464,22 @@ export function Payment() {
                                   type='checkbox'
                                   name='declaration'
                                   render={({ field }) => (
-                                    <label style={{ width: '100%', height: '100%', display: 'inline-flex', gap: '8px',justifyContent:'flexStart',alignItems:'center' }}>
-                                    <div class="form-check"
+                                    <label style={{ width: '100%', height: '100%', display: 'inline-flex', gap: '8px', justifyContent: 'flexStart', alignItems: 'center' }}>
+                                      <div class="form-check"
                                         style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          justifyContent: "center",
 
 
                                         }}>
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" style={{ borderRadius: "4px", width: "17px", height: "17px", border: "2px solid rgb(228, 149, 55)" }}
-                                            
-                                            onChange={handleCheckbox1Change}
+
+                                          onChange={handleCheckbox1Change}
+
                                         ></input>
 
-                                    </div>
+                                      </div>
                                       <span style={{ letterSpacing: '0.02em', color: "black", fontSize: "16px" }}>
                                         Although I have not had any previous operations, I do not currently have any ongoing health problems. I declare that I am healthy.    </span>
                                     </label>
@@ -431,7 +495,7 @@ export function Payment() {
                                   name='marketing_authorization'
 
                                   render={({ field }) => (
-                                    <label style={{ width: '100%', height: '100%', display: 'inline-flex', gap: '8px',justifyContent:'flexStart',alignItems:'center' }}>
+                                    <label style={{ width: '100%', height: '100%', display: 'inline-flex', gap: '8px', justifyContent: 'flexStart', alignItems: 'center' }}>
 
                                       <div class="form-check"
                                         style={{
@@ -444,6 +508,7 @@ export function Payment() {
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" style={{ borderRadius: "4px", width: "17px", height: "17px", border: "2px solid rgb(228, 149, 55)" }}
 
                                           onChange={handleCheckbox2Change}
+
                                         ></input>
 
                                       </div>
@@ -551,6 +616,12 @@ export function Payment() {
 
                       </div>
                     </div>}
+
+                    {alertStatus && (
+                      <div className='alertDivStepper'>
+                        <Alert severity="warning">Please enter all information completely.</Alert>
+                      </div>
+                    )}
                   </div>
 
                 )

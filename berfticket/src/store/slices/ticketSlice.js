@@ -8,6 +8,7 @@ to:'',
 date:'',
 trips:[],
 tripsId:[],
+seat:'',
 },
 reducers:{
 setFrom:(state,action)=>{
@@ -28,8 +29,11 @@ setTrips: (state, action) => {
   setTripsId: (state, action) => {
     state.tripsId = action.payload; // trips verilerini günceller
   },
+  setSeat: (state, action) => {
+    state.seat= action.payload; // trips verilerini günceller
+  },
 }
 });
 
-export const {setFrom,setTo,setDate,setTrips,setTripsId} = ticketSlice.actions;
+export const {setFrom,setTo,setDate,setTrips,setTripsId,setSeat} = ticketSlice.actions;
 export const ticketReducer= ticketSlice.reducer;

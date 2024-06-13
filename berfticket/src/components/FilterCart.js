@@ -15,21 +15,29 @@ import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Grid from '@mui/material/Grid';
 import { Height, RunCircle } from '@mui/icons-material';
+import { setSeat } from '../store/slices/ticketSlice';
+import Alert from '@mui/material/Alert';
+
 
 export function FilterCart({ trip }) {
+    const dispatch = useDispatch();
     const [nameOfFrom, setNameFrom] = useState("");
     const [nameOfTo, setNameTo] = useState("");
     const [selectedSeat, setSelectedSeat] = useState();
+    const [seatChecked, setSeatChecked] = useState(false);
     const [seats, setSeats] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
 
-    const { from, to } = useSelector((state) => {
+    const { from, to, seat } = useSelector((state) => {
 
         return {
             from: state.ticket.from,
             to: state.ticket.to,
+            seat: state.ticket.seat,
 
         };
     });
+
     const {
         arrivalCityID,
         arrivalTime,
@@ -45,8 +53,11 @@ export function FilterCart({ trip }) {
         try {
             const responseFromName = await axios.get(`https://localhost:7224/api/cities/GetCityById?id=${from}`);
             setNameFrom(responseFromName.data.data.cityName)
+
+
             const responseToName = await axios.get(`https://localhost:7224/api/cities/GetCityById?id=${to}`);
             setNameTo(responseToName.data.data.cityName);
+
         }
         catch (error) {
             console.error('Error fetching data', error);
@@ -54,10 +65,24 @@ export function FilterCart({ trip }) {
 
     };
     const navigate = useNavigate();
+
     const getBuyPage = () => {
-        navigate("/payment");
+       
+        if (seat == null || seat == "") {
+            setSeatChecked(true);
+
+            setTimeout(() => {
+                setSeatChecked(false);
+              }, 5000);
+        }
+        else {
+            navigate("/payment");
+            setSeatChecked(false);
+        }
+
 
     }
+
 
     const fetchTicketData = async () => {
 
@@ -107,6 +132,8 @@ export function FilterCart({ trip }) {
                             setSelectedSeat(numberSelect);
                         }}
 
+
+
                     >
 
                         {seatNumber}
@@ -128,7 +155,8 @@ export function FilterCart({ trip }) {
         fetchData();
     }, [from, to]);
     useEffect(() => {
-        console.log(selectedSeat, "aaaaaaaaaaaaaaaaaa");
+        dispatch(setSeat(selectedSeat));
+        console.log("seat in slice", seat)
     }, [selectedSeat]);
     return (
         <div className='ana'>
@@ -193,7 +221,7 @@ export function FilterCart({ trip }) {
 
                                     </div>
                                     <div className='Buy'>
-                                        <button className='buttonBuy' onClick={ getBuyPage }>
+                                        <button className='buttonBuy' onClick={getBuyPage}>
                                             Buy Ticket
                                         </button>
                                     </div>
@@ -203,6 +231,11 @@ export function FilterCart({ trip }) {
                     </li>
                 </ul>
             </div>
+            {seatChecked && (
+                <div className='alertDiv'>
+                      <Alert severity="warning">Please select seat number.</Alert>
+                </div>
+            )}
         </div>
     );
 }
